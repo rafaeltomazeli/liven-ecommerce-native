@@ -1,6 +1,5 @@
 import {BaseColor, BaseTheme} from './theme.interface';
 
-// Add and change the colors used in all the flavors of the project here
 const commonColors = {
     grayXLight: '#B3B3B3',
     grayLight: '#989898',
@@ -10,7 +9,7 @@ const commonColors = {
     white: '#FFFFFF',
     black: '#212121',
 
-    alpha: '80', // 50%
+    alpha: '80',
 };
 
 const messageColors = {
@@ -58,7 +57,6 @@ const color: BaseColor = {
     alpha: commonColors.alpha,
 };
 
-// Change the values here to the ones most frequently used in your project
 export const commonTheme: BaseTheme = {
     theme: 'common',
     border: {
