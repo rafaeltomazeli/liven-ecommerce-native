@@ -6,6 +6,7 @@ import {CartProduct} from '@app/model/cart/cart.model';
 
 export const cartTestIds = {
     add: 'addProduct',
+    addSecond: 'addSecond',
     remove: 'removeProduct',
     modify: 'modifyQuantity',
     modifyZero: 'modifyZero',
@@ -31,6 +32,13 @@ export const testProduct: CartProduct = {
     quantity: quantities.initial,
 };
 
+export const testProduct2: CartProduct = {
+    name: 'testProduct2',
+    id: '2',
+    price: 10.5,
+    quantity: quantities.initial,
+};
+
 export const TestComponent = () => {
     const {
         products,
@@ -47,6 +55,11 @@ export const TestComponent = () => {
                 testID={cartTestIds.add}
                 title={cartTestIds.add}
                 onPress={() => addOrModifyProduct(testProduct)}
+            />
+            <Button
+                testID={cartTestIds.addSecond}
+                title={cartTestIds.addSecond}
+                onPress={() => addOrModifyProduct(testProduct2)}
             />
             <Button
                 testID={cartTestIds.remove}

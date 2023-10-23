@@ -41,6 +41,7 @@ describe('Cart Provider', () => {
 
     test('if given a cart when a cart is cleared, cart should clear', () => {
         fireEvent.press(screen.getByTestId(cartTestIds.add));
+        fireEvent.press(screen.getByTestId(cartTestIds.addSecond));
         fireEvent.press(screen.getByTestId(cartTestIds.clear));
 
         expect(screen.queryByTestId(cartTestIds.name)).toBeNull;
