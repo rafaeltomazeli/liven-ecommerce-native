@@ -1,5 +1,3 @@
-import {getProducts} from './app/data/api.requests';
-import {useData} from './app/domain/data/data.use-case';
 import React from 'react';
 import type {PropsWithChildren} from 'react';
 import {
@@ -19,6 +17,12 @@ import {
     LearnMoreLinks,
     ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {
+    getCategories,
+    getProducts,
+    getProductsDetail,
+} from './src/app/data/api.requests';
+import {useData} from './src/app/domain/data/data.use-case';
 
 type SectionProps = PropsWithChildren<{
     title: string;
@@ -53,7 +57,13 @@ function Section({children, title}: SectionProps): JSX.Element {
 function App(): JSX.Element {
     const isDarkMode = useColorScheme() === 'dark';
 
-    const {data, error, loading, request} = useData(getProducts);
+    const {data, error, loading, request} = useData(getProductsDetail, {id: 1});
+    console.log(data, error, loading, request);
+    if (data === null && loading === false) {
+        request();
+    }
+
+    console.log(data, error, loading, request);
 
     const backgroundStyle = {
         backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,

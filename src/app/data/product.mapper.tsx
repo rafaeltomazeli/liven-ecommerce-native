@@ -1,6 +1,6 @@
-import {fakeStoreProduct} from 'app/models/fakeStoreApi/fakeStoreApi.model';
-import {Product} from 'app/models/Products/products.model';
-import {formatToBrazilianReal} from 'app/utils/string.utils';
+import {fakeStoreProduct} from '../models/fakeStoreApi/fakeStoreApi.model';
+import {Product} from '../models/Products/products.model';
+import {formatToBrazilianReal} from '../utils/string.utils';
 
 export const mapProductResponse = (product: fakeStoreProduct): Product => {
     return {

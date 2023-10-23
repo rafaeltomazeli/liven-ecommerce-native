@@ -1,6 +1,6 @@
-import {ApiResponse} from 'app/data/api.requests';
-import {getErrorMessage} from 'app/utils/error-message.utils';
 import {useState} from 'react';
+import {getErrorMessage} from '../../utils/error-message.utils';
+import {ApiResponse} from '../../data/api.requests';
 
 export const useData = (
     fetchFunction: ({

@@ -1,4 +1,4 @@
-import {API_URL} from '@env';
+//import {API_URL} from '@env';
 import axios from 'axios';
 
 export const END_POINTS = {
@@ -7,6 +7,6 @@ export const END_POINTS = {
 };
 
 export const fakeStorageApi = axios.create({
-    baseURL: API_URL,
+    baseURL: 'https://fakestoreapi.com/',
     timeout: 1000,
 });

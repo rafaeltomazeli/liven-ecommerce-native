@@ -1,10 +1,9 @@
-import {Product} from 'app/models/Products/products.model';
-import {fakeStoreProduct} from 'app/models/fakeStoreApi/fakeStoreApi.model';
-
+import {Product} from '../models/Products/products.model';
+import {fakeStoreProduct} from '../models/fakeStoreApi/fakeStoreApi.model';
+import {getErrorMessage} from '../utils/error-message.utils';
 import {END_POINTS, fakeStorageApi} from './axios.config';
 
 import {mapProductResponse} from './product.mapper';
-import {getErrorMessage} from 'app/utils/error-message.utils';
 
 export interface ApiResponse<T> {
     data: T;
@@ -33,7 +32,13 @@ export const getProducts = async (): Promise<ApiResponse<Product[]>> => {
     };
 };
 
-export const getProductsDetail = async ({id}: {id: string}) => {
+export const getProductsDetail = async ({id}: {id?: string} = {}) => {
+    if (!id) {
+        return {
+            data: [],
+            error: 'no Id',
+        };
+    }
     const response = await fetchData(`${END_POINTS.products}/${id}`);
     return {
         data: mapProductResponse(response.data),
