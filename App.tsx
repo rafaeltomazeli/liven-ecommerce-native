@@ -23,6 +23,12 @@ import {
     getProductsDetail,
 } from './src/app/data/api.requests';
 import {useData} from './src/app/domain/data/data.use-case';
+import {Button} from './src/atomic/atm.button/button.component';
+import {ThemeProvider} from 'styled-components';
+import {commonTheme} from './src/atomic/obj.theme';
+import {TextField} from './src/atomic/mol.textfield/text-field.component';
+import {Thumbnail} from './src/atomic/atm.thumbnail/thumbnail.component';
+import {VBox} from './src/atomic/obj.grid/grid.component.style';
 
 type SectionProps = PropsWithChildren<{
     title: string;
@@ -57,14 +63,6 @@ function Section({children, title}: SectionProps): JSX.Element {
 function App(): JSX.Element {
     const isDarkMode = useColorScheme() === 'dark';
 
-    const {data, error, loading, request} = useData(getProductsDetail, {id: 1});
-    console.log(data, error, loading, request);
-    if (data === null && loading === false) {
-        request();
-    }
-
-    console.log(data, error, loading, request);
-
     const backgroundStyle = {
         backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     };
@@ -86,6 +84,20 @@ function App(): JSX.Element {
                             : Colors.white,
                     }}>
                     <Section title="Step One">
+                        <ThemeProvider theme={commonTheme}>
+                            <VBox>
+                                <Thumbnail
+                                    source={{
+                                        uri: 'https://picsum.photos/seed/picsum/200/300',
+                                    }}
+                                />
+                                <TextField></TextField>
+                                <Button.Primary
+                                    text={'me aperte'}
+                                    onTap={() => console.log('tap')}
+                                />
+                            </VBox>
+                        </ThemeProvider>
                         Edit <Text style={styles.highlight}>App.tsx</Text> to
                         change this screen and then come back to see your edits.
                     </Section>

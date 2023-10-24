@@ -72,7 +72,6 @@ export const commonTheme: BaseTheme = {
         iconSize: 20,
     },
     fieldHeight: 50,
-    animationDuration: 200,
     fontFamily: {
         primary: {
             bold: 'HelveticaNeue-Bold',
