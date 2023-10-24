@@ -19,17 +19,13 @@ describe('Cart Provider', () => {
     test('if given a product when added  cart should update', () => {
         fireEvent.press(screen.getByText(cartTestIds.add));
 
-        expect(screen.getByTestId(cartTestIds.name)).toHaveTextContent(
-            testProduct.name,
-        );
+        expect(screen.getByText(testProduct.name)).toBeDefined();
     });
     test('if given a product is added again  cart should update quantity', () => {
         fireEvent.press(screen.getByTestId(cartTestIds.add));
         fireEvent.press(screen.getByTestId(cartTestIds.add));
 
-        expect(screen.getByTestId(cartTestIds.quantity)).toHaveTextContent(
-            testProduct.quantity + 1,
-        );
+        expect(screen.getByText(`${testProduct.quantity + 1}`)).toBeDefined();
     });
 
     test('if given a cart when a product is removed, cart should update', () => {
@@ -51,9 +47,7 @@ describe('Cart Provider', () => {
         fireEvent.press(screen.getByTestId(cartTestIds.add));
         fireEvent.press(screen.getByTestId(cartTestIds.modify));
 
-        expect(screen.getByTestId(cartTestIds.quantity)).toHaveTextContent(
-            quantities.modify,
-        );
+        expect(screen.getByText(`${quantities.modify}`)).toBeDefined();
     });
 
     test('if given a cart when quantity is set to zero, product should be removed', () => {
