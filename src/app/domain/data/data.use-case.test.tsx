@@ -6,59 +6,60 @@ import {useData} from './data.use-case';
 jest.mock('axios');
 
 describe('useData  hook', () => {
-    test('if data is valid  and an array useData should return it with loading and error null', async () => {
-        const sucessfullResponse = {
+    test('if data is valid and an array useData should return it with loading and error null', async () => {
+        const successfullResponse = {
             data: ['a', 'b', 'c'],
             error: null,
         };
 
         const {result} = renderHook(() =>
             useData(
-                (axios.get as jest.Mock).mockResolvedValue(sucessfullResponse),
+                (axios.get as jest.Mock).mockResolvedValue(successfullResponse),
             ),
         );
-        const {data, error, loading, request} = result.current;
-        act(() => {
-            request();
+
+        await act(async () => {
+            await result.current.request();
         });
-        expect(data).toEqual(sucessfullResponse.data);
-        expect(error).toBeNull();
-        expect(loading).toEqual(false);
+
+        expect(result.current.data).toEqual(successfullResponse.data);
+        expect(result.current.error).toBeUndefined();
+        expect(result.current.loading).toEqual(false);
     });
     test('if data is valid  and an object useData should return it with loading and error null', async () => {
-        const sucessfullResponse = {
+        const successfullResponse = {
             data: {a: 1, b: 2},
             error: null,
         };
+
         const {result} = renderHook(() =>
             useData(
-                (axios.get as jest.Mock).mockResolvedValue(sucessfullResponse),
+                (axios.get as jest.Mock).mockResolvedValue(successfullResponse),
             ),
         );
-        const {data, error, loading, request} = result.current;
-        await act(() => {
-            waitFor(() => request());
+
+        await act(async () => {
+            await result.current.request();
         });
-        expect(data).toEqual(sucessfullResponse.data);
-        expect(error).toBeNull();
-        expect(loading).toEqual(false);
+
+        expect(result.current.data).toEqual(successfullResponse.data);
+        expect(result.current.error).toBeUndefined();
+        expect(result.current.loading).toEqual(false);
     });
-    test('if useData receives error it should return error and empty data', () => {
-        const sucessfullResponse = {
-            data: [],
-            error: {message: 'erro'},
-        };
+    test('if useData receives error it should return error and empty data', async () => {
+        const errorMessage = 'error';
+        const error = new Error(errorMessage);
+
         const {result} = renderHook(() =>
-            useData(
-                (axios.get as jest.Mock).mockResolvedValue(sucessfullResponse),
-            ),
+            useData((axios.get as jest.Mock).mockRejectedValue(error)),
         );
-        const {data, error, loading, request} = result.current;
-        act(() => {
-            request();
+
+        await act(async () => {
+            await result.current.request();
         });
-        expect(data).toHaveLength(0);
-        expect(error).toEqual(sucessfullResponse.error);
-        expect(loading).toEqual(false);
+
+        expect(result.current.data).toBeNull();
+        expect(result.current.error).toEqual(errorMessage);
+        expect(result.current.loading).toEqual(false);
     });
 });

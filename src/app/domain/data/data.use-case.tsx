@@ -10,7 +10,7 @@ export const useData = (
     }) => Promise<ApiResponse<any>>,
     additionalParams?: {[key: string]: string | number},
 ) => {
-    const [data, setData] = useState(null);
+    const [data, setData] = useState<any>(null);
     const [error, setError] = useState<string>();
     const [loading, setLoading] = useState(false);
 
