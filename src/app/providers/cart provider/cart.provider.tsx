@@ -1,7 +1,6 @@
 import React, {PropsWithChildren} from 'react';
 import update from 'immutability-helper';
-
-import {CartProduct} from '@app/model/cart/cart.model';
+import {CartProduct} from 'src/app/model/cart/cart.model';
 
 export interface CartContextState {
     products: CartProduct[];
