@@ -1,5 +1,5 @@
-import {Product} from '../models/Products/products.model';
-import {fakeStoreProduct} from '../models/fakeStoreApi/fakeStoreApi.model';
+import {Product} from '../model/products/products.model';
+import {fakeStoreProduct} from '../model/fakeStoreApi/fakeStoreApi.model';
 import {getErrorMessage} from '../utils/error-message.utils';
 import {END_POINTS, fakeStorageApi} from './axios.config';
 
