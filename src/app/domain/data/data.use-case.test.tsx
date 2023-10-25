@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {renderHook, act, waitFor} from '@testing-library/react-native';
+import {renderHook, act} from '@testing-library/react-native';
 import {useData} from './data.use-case';
 
 jest.mock('axios');

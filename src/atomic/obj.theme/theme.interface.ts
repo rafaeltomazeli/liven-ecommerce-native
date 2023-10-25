@@ -91,7 +91,6 @@ export interface BaseTheme {
     iconSize: BaseIconSize;
     opacity: BaseOpacity;
     spacing: BaseSpacing;
-    animationDuration: number;
 }
 
 export interface ThemeProps {
