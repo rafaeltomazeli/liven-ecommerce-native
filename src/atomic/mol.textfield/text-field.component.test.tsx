@@ -16,7 +16,6 @@ describe('Button component', () => {
         render(
             <ThemeProvider theme={commonTheme}>
                 <TextField
-                    testID="pudim"
                     placeholder={TextFieldProps.placeholder}
                     onSubmit={mockFunction}
                 />
