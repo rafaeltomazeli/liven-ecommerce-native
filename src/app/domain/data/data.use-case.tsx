@@ -20,9 +20,11 @@ export const useData = (
             const result = additionalParams
                 ? await fetchFunction(additionalParams)
                 : await fetchFunction();
+            console.log(result);
             setData(result.data);
         } catch (error: unknown) {
             setError(getErrorMessage(error));
+            console.log(error);
         } finally {
             setLoading(false);
         }

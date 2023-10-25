@@ -36,7 +36,7 @@ export const H3 = styled.Text<TitleProps>`
 
 export const H4 = styled.Text<TitleProps>`
     color: ${props => props.theme.color.grayXDark};
-    font-size: ${props => props.theme.fontSize.xSmall};
+    font-size: ${props => props.theme.fontSize.medium};
     ${props => props.mb && `margin-bottom: ${props.theme.spacing.xSmall}px;`}
 `;
 
