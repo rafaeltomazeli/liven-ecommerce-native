@@ -1,6 +1,6 @@
 import React, {PropsWithChildren} from 'react';
 import update from 'immutability-helper';
-import {CartProduct} from 'src/app/model/cart/cart.model';
+import {CartProduct} from '../../model/cart/cart.model';
 
 export interface CartContextState {
     products: CartProduct[];
@@ -67,8 +67,9 @@ export const CartProvider: React.FC<PropsWithChildren> = props => {
 
     const modifyQuantity = (id: string, quantity: number) => {
         const indexToModify = products.findIndex(element => element.id === id);
-        const originalPrice = products[indexToModify].price;
-        const newPrice = originalPrice * quantity;
+        const originalPrice =
+            products[indexToModify].price * products[indexToModify].quantity;
+        const newPrice = products[indexToModify].price * quantity;
 
         const updatedProducts = update(products, {
             $merge: {[indexToModify]: {quantity, price: newPrice}},

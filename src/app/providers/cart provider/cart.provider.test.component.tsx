@@ -1,9 +1,8 @@
 import * as React from 'react';
-import {CartContext, CartProvider} from './cart.provider';
+import {CartContext} from './cart.provider';
 import {useContext} from 'react';
 import {Button, View, Text} from 'react-native';
-
-import {CartProduct} from 'src/app/model/cart/cart.model';
+import {CartProduct} from '../../model/cart/cart.model';
 
 export const cartTestIds = {
     add: 'addProduct',
@@ -30,6 +29,7 @@ export const testProduct: CartProduct = {
     name: 'testProduct',
     id: '1',
     price: 5.5,
+    image: {uri: 'test'},
     quantity: quantities.initial,
 };
 
@@ -37,6 +37,7 @@ export const testProduct2: CartProduct = {
     name: 'testProduct2',
     id: '8',
     price: 10.5,
+    image: {uri: 'test2'},
     quantity: quantities.initial,
 };
 

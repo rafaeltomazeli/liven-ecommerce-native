@@ -20,7 +20,6 @@ export const H2 = styled.Text`
     font-size: ${props => props.theme.fontSize.large};
     margin-bottom: ${props => props.theme.spacing.small}px;
     margin-top: ${props => props.theme.spacing.small}px;
-    text-transform: uppercase;
 `;
 
 interface TitleProps {

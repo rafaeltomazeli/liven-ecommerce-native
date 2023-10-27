@@ -8,6 +8,6 @@ export const mapProductResponse = (product: fakeStoreProduct): Product => {
         description: product.description,
         id: product.id.toString(),
         imageUrl: {uri: product.image},
-        price: formatToBrazilianReal.format(product.price),
+        price: product.price,
     };
 };

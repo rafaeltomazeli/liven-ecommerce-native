@@ -1,13 +1,11 @@
 import * as React from 'react';
 
 import {NavigationPageFC} from '../../model/navigation/navigation.model';
-import {H2} from '../../../atomic/atm.typography/typography.component.style';
 import {
     Root,
     VBox,
     VSeparator,
 } from '../../../atomic/obj.grid/grid.component.style';
-import {Button} from '../../../atomic/atm.button/button.component';
 import {Navigation} from '../navigation/navigation';
 import ProductDetailsPage from './product-details.page';
 import {PageName} from '../page-name.constants';
@@ -16,7 +14,7 @@ import {useData} from '../../domain/data/data.use-case';
 import {getProducts} from '../../data/api.requests';
 import {Product} from '../../model/products/products.model';
 import {ProductListItemProps} from './product-list-item.component';
-import {TextInput} from 'react-native';
+import {formatToBrazilianReal} from '../../utils/string.utils';
 
 const HomePage: NavigationPageFC<{}> = props => {
     const {data, loading, error, request} = useData(getProducts);
@@ -42,7 +40,7 @@ const HomePage: NavigationPageFC<{}> = props => {
         return {
             name: product.name,
             id: product.id,
-            price: product.price,
+            price: formatToBrazilianReal.format(product.price),
             image: product.imageUrl,
             onItemTap: handleTap,
         };

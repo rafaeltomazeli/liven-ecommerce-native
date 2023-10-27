@@ -17,16 +17,26 @@ import {getProductsDetail} from '../../data/api.requests';
 import {Thumbnail} from '../../../atomic/atm.thumbnail/thumbnail.component';
 import {ThumbnailSizes} from '../../../atomic/atm.thumbnail/thumbnail.component.style';
 import {Button} from '../../../atomic/atm.button/button.component';
+import {useContext} from 'react';
+import {CartContext} from '../../providers/cart provider/cart.provider';
+import {Navigation} from '../navigation/navigation';
+import CartPage from '../cart/cart.page';
+import {Product} from '../../model/products/products.model';
+import {mapProductToCartProduct} from '../../providers/cart provider/cart-provider.mapper';
 
 export interface ProductDetailsPageProps {
     id: string;
 }
 
 const ProductDetailsPage: NavigationPageFC<ProductDetailsPageProps> = props => {
-    console.log(props);
-    const {data, loading, error, request} = useData(getProductsDetail, {
-        id: props.navigation?.id as string,
-    });
+    const {data, loading, error, request} = useData<Product>(
+        getProductsDetail,
+        {
+            id: props.navigation?.id as string,
+        },
+    );
+
+    const {addOrModifyProduct} = useContext(CartContext);
 
     React.useEffect(() => {
         if (!data && !loading && !error) {
@@ -34,12 +44,23 @@ const ProductDetailsPage: NavigationPageFC<ProductDetailsPageProps> = props => {
         }
     }, [data, loading, error, request]);
 
-    const handleAddToCart = () => {};
+    const handleAddToCart = () => {
+        if (data) {
+            addOrModifyProduct(mapProductToCartProduct(data));
+            Navigation.push({
+                fromComponentId: props?.componentId as string,
+                component: CartPage,
+            });
+        }
+    };
 
     return (
         <Root>
             <VSeparator />
-            <VBox hAlign="center">
+            <VSeparator />
+            <VSeparator />
+            <VBox hAlign="center" vAlign="center">
+                <VSeparator />
                 <VSeparator />
                 <Thumbnail
                     size={ThumbnailSizes.large}

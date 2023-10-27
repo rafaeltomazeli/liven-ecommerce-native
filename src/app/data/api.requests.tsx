@@ -32,10 +32,12 @@ export const getProducts = async (): Promise<ApiResponse<Product[]>> => {
     };
 };
 
-export const getProductsDetail = async ({id}: {id?: string} = {}) => {
+export const getProductsDetail = async ({id}: {id?: string} = {}): Promise<
+    ApiResponse<Product>
+> => {
     if (!id) {
         return {
-            data: [],
+            data: {} as Product,
             error: 'no Id',
         };
     }
@@ -46,7 +48,7 @@ export const getProductsDetail = async ({id}: {id?: string} = {}) => {
     };
 };
 
-export const getCategories = async () => {
+export const getCategories = async (): Promise<ApiResponse<string[]>> => {
     const response = await fetchData(END_POINTS.categories);
     return {
         data: response.data,
