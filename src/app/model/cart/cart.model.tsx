@@ -1,11 +1,9 @@
-import {ImageSourcePropType} from 'react-native';
-
 export interface CartProduct {
     name: string;
     id: string;
     price: number;
     quantity: number;
-    image: ImageSourcePropType;
+    image: string;
 }
 
 export interface Cart {

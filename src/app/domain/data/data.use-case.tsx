@@ -6,7 +6,7 @@ interface FetchHook<T> {
     data: T;
     error: string | undefined;
     loading: boolean;
-    request: ({key}?: {[key: string]: string | number}) => Promise<void>;
+    request: ({key}?: Record<string, string | number>) => Promise<void>;
 }
 
 export const useData: <T>(
@@ -25,11 +25,9 @@ export const useData: <T>(
             const result = additionalParams
                 ? await fetchFunction(additionalParams)
                 : await fetchFunction();
-            console.log(result);
             setData(result.data);
         } catch (error: unknown) {
             setError(getErrorMessage(error));
-            console.log(error);
         } finally {
             setLoading(false);
         }

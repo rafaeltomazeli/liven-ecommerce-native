@@ -13,12 +13,14 @@ import {ImageSourcePropType, TouchableOpacity, Image} from 'react-native';
 import {CartProductModifier} from './cart-product-modifier.component';
 import {Asset} from '../../../atomic/obj.asset/asset.component';
 import {DividerGray} from '../../../atomic/atm.divider/divider.component.style';
+import {formatToBrazilianReal} from '../../utils/string.utils';
 
 export interface CartItemProps {
     name: string;
     id: string;
     image: ImageSourcePropType;
     quantity: number;
+    price: number;
     onAdd: (id: string) => void;
     onRemove: (id: string) => void;
     onDelete: (id: string) => void;
@@ -29,6 +31,7 @@ export const CartItem: React.FC<CartItemProps> = ({
     id,
     image,
     quantity,
+    price,
     onAdd,
     onRemove,
     onDelete,
@@ -59,6 +62,8 @@ export const CartItem: React.FC<CartItemProps> = ({
                                 onRemove={onRemove}
                                 onDelete={onDelete}
                             />
+                            <VSeparator half />
+                            <DD>{formatToBrazilianReal.format(price)}</DD>
                         </HBox.Item>
                     </HBox>
                 </HBox.Item>

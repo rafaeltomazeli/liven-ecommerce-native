@@ -5,6 +5,6 @@ export const AddAndRemoveWrapper = styled.View`
 `;
 
 export const QuantityWrapper = styled.View`
-    padding-horizontal: ${props => props.theme.spacing.small};
+    padding-horizontal: ${props => props.theme.spacing.small}px;
     margin: auto;
 `;

@@ -17,12 +17,12 @@ import {getProductsDetail} from '../../data/api.requests';
 import {Thumbnail} from '../../../atomic/atm.thumbnail/thumbnail.component';
 import {ThumbnailSizes} from '../../../atomic/atm.thumbnail/thumbnail.component.style';
 import {Button} from '../../../atomic/atm.button/button.component';
-import {useContext} from 'react';
-import {CartContext} from '../../providers/cart provider/cart.provider';
 import {Navigation} from '../navigation/navigation';
 import CartPage from '../cart/cart.page';
 import {Product} from '../../model/products/products.model';
 import {mapProductToCartProduct} from '../../providers/cart provider/cart-provider.mapper';
+import {addOrModifyProduct} from '../../providers/cart provider/cart-store.hookstate';
+import {formatToBrazilianReal} from '../../utils/string.utils';
 
 export interface ProductDetailsPageProps {
     id: string;
@@ -36,8 +36,6 @@ const ProductDetailsPage: NavigationPageFC<ProductDetailsPageProps> = props => {
         },
     );
 
-    const {addOrModifyProduct} = useContext(CartContext);
-
     React.useEffect(() => {
         if (!data && !loading && !error) {
             request();
@@ -47,10 +45,7 @@ const ProductDetailsPage: NavigationPageFC<ProductDetailsPageProps> = props => {
     const handleAddToCart = () => {
         if (data) {
             addOrModifyProduct(mapProductToCartProduct(data));
-            Navigation.push({
-                fromComponentId: props?.componentId as string,
-                component: CartPage,
-            });
+            Navigation.navigateToTab(props?.componentId as string, 1);
         }
     };
 
@@ -64,7 +59,7 @@ const ProductDetailsPage: NavigationPageFC<ProductDetailsPageProps> = props => {
                 <VSeparator />
                 <Thumbnail
                     size={ThumbnailSizes.large}
-                    source={data?.imageUrl}
+                    source={{uri: data?.imageUrl}}
                 />
 
                 <VSeparator />
@@ -74,7 +69,11 @@ const ProductDetailsPage: NavigationPageFC<ProductDetailsPageProps> = props => {
             <VBox>
                 <Body>{data?.description}</Body>
                 <VSeparator />
-                <BodySecondary>{data?.price}</BodySecondary>
+                <BodySecondary>
+                    {data?.price
+                        ? formatToBrazilianReal.format(data.price)
+                        : 'N/A'}
+                </BodySecondary>
                 <VSeparator />
                 <Button.Primary text={'adicionar'} onTap={handleAddToCart} />
             </VBox>

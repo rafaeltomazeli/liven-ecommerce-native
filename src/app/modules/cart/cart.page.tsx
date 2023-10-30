@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {NavigationPageFC} from '../../model/navigation/navigation.model';
 import {
+    Body,
     BodySecondary,
     H2,
 } from '../../../atomic/atm.typography/typography.component.style';
@@ -11,20 +12,22 @@ import {
     VSeparator,
 } from '../../../atomic/obj.grid/grid.component.style';
 import {PageName} from '../page-name.constants';
-import {CartContext} from '../../providers/cart provider/cart.provider';
 import {CartItem} from './cart-item.component';
 import {formatToBrazilianReal} from '../../utils/string.utils';
 import {DividerGray} from '../../../atomic/atm.divider/divider.component.style';
 import {ScrollView} from 'react-native';
+import {useHookstate} from '@hookstate/core';
+import {
+    addOrModifyProduct,
+    cartState,
+    modifyOrRemoveProduct,
+    removeProduct,
+} from '../../providers/cart provider/cart-store.hookstate';
+import {CartProduct} from '../../model/cart/cart.model';
 
 const CartPage: NavigationPageFC = () => {
-    const {
-        products,
-        total,
-        addOrModifyProduct,
-        removeProduct,
-        modifyOrRemoveProduct,
-    } = React.useContext(CartContext);
+    const cartStore = useHookstate(cartState);
+    const {products, total} = cartStore.get();
 
     return (
         <Root bgColor>
@@ -40,8 +43,9 @@ const CartPage: NavigationPageFC = () => {
                                     <CartItem
                                         name={product.name}
                                         id={product.id}
-                                        image={product.image}
+                                        image={{uri: product.image}}
                                         quantity={product.quantity}
+                                        price={product.price}
                                         onAdd={() =>
                                             addOrModifyProduct(product)
                                         }
@@ -68,16 +72,19 @@ const CartPage: NavigationPageFC = () => {
                                 <VSeparator />
                             </>
                         )}
-                        {total ? (
-                            <VBox hAlign={'flex-end'}>
-                                <BodySecondary>
-                                    {formatToBrazilianReal.format(total)}
-                                </BodySecondary>
-                            </VBox>
-                        ) : (
-                            <></>
-                        )}
                     </VBox>
+                    <VSeparator />
+                    {total > 0 ? (
+                        <VBox hAlign={'flex-end'} bgColor>
+                            <Body>
+                                {`total do carrinho: ${formatToBrazilianReal.format(
+                                    total,
+                                )}`}
+                            </Body>
+                        </VBox>
+                    ) : (
+                        <></>
+                    )}
                 </VBox>
             </ScrollView>
         </Root>

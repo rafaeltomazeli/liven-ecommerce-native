@@ -11,11 +11,13 @@ interface ProductListProps {
     products: ProductListItemProps[];
 }
 
-export const ProductList: React.FC<ProductListProps> = ({products}) => (
-    <FlatList
-        data={products}
-        renderItem={renderProductListItem}
-        keyExtractor={item => `${item.id}`}
-        ItemSeparatorComponent={() => <DividerGray />}
-    />
-);
+export const ProductList: React.FC<ProductListProps> = ({products}) => {
+    return (
+        <FlatList
+            data={products}
+            renderItem={renderProductListItem}
+            keyExtractor={item => `${item.id}`}
+            ItemSeparatorComponent={() => <DividerGray />}
+        />
+    );
+};

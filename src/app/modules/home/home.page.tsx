@@ -26,10 +26,6 @@ const HomePage: NavigationPageFC<{}> = props => {
         });
     };
 
-    if (!data && !loading && !error) {
-        request();
-    }
-
     React.useEffect(() => {
         if (!data && !loading && !error) {
             request();
@@ -41,20 +37,22 @@ const HomePage: NavigationPageFC<{}> = props => {
             name: product.name,
             id: product.id,
             price: formatToBrazilianReal.format(product.price),
-            image: product.imageUrl,
+            image: {uri: product.imageUrl},
             onItemTap: handleTap,
         };
     };
 
     const mappedProducts = data
-        ? data.map((item: Product) => mapDataToProductsList(item))
+        ? data?.map((item: Product) => mapDataToProductsList(item))
         : [];
 
     return (
         <Root>
             <VBox>
                 <VSeparator />
-                <ProductList products={mappedProducts} />
+                {mappedProducts.length > 0 && (
+                    <ProductList products={mappedProducts} />
+                )}
                 <VSeparator />
             </VBox>
         </Root>

@@ -5,7 +5,6 @@ import {ThemeProvider} from 'styled-components';
 import {commonTheme} from '../../../atomic/obj.theme';
 import {Options} from 'react-native-navigation';
 import {NavigationPage} from '../../model/navigation/navigation.model';
-import {CartProvider} from '../../providers/cart provider/cart.provider';
 
 export type NavigationPageType = 'push' | 'modal' | 'overlay';
 
@@ -29,9 +28,7 @@ export const setNavigationPage =
         const RootNavigation = (props: P) => {
             return (
                 <ThemeProvider theme={commonTheme}>
-                    <CartProvider>
-                        <Component {...props} />
-                    </CartProvider>
+                    <Component {...props} />
                 </ThemeProvider>
             );
         };
