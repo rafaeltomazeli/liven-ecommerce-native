@@ -20,7 +20,6 @@ export const H2 = styled.Text`
     font-size: ${props => props.theme.fontSize.large};
     margin-bottom: ${props => props.theme.spacing.small}px;
     margin-top: ${props => props.theme.spacing.small}px;
-    text-transform: uppercase;
 `;
 
 interface TitleProps {
@@ -36,7 +35,7 @@ export const H3 = styled.Text<TitleProps>`
 
 export const H4 = styled.Text<TitleProps>`
     color: ${props => props.theme.color.grayXDark};
-    font-size: ${props => props.theme.fontSize.xSmall};
+    font-size: ${props => props.theme.fontSize.medium};
     ${props => props.mb && `margin-bottom: ${props.theme.spacing.xSmall}px;`}
 `;
 

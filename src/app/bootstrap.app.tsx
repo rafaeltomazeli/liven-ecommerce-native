@@ -1,9 +1,9 @@
 import {Asset} from '../atomic/obj.asset/asset.component';
 import {commonTheme} from '../atomic/obj.theme';
 import {Navigation} from './modules/navigation/navigation';
-import HomePage from './modules/Home/home.page';
-import CartPage from './modules/Cart/cart.page';
-import ProductDetailsPage from './modules/Home/product-details.page';
+import HomePage from './modules/home/home.page';
+import CartPage from './modules/cart/cart.page';
+import ProductDetailsPage from './modules/home/product-details.page';
 
 export const bootstrap = () => {
     Navigation.register({Component: HomePage});

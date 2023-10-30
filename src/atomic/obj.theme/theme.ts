@@ -1,7 +1,7 @@
 import {BaseColor, BaseTheme} from './theme.interface';
 
 const commonColors = {
-    grayXLight: '#B3B3B3',
+    grayXLight: '#F5F5F5',
     grayLight: '#989898',
     gray: '#8F8F8F',
     grayDark: '#7D7D7D',

@@ -81,7 +81,6 @@ export const TextField = React.forwardRef<TextInput, BaseTextFieldProps>(
         };
 
         const handleSubmit = (event: TextInputSubmitEditingEventData) => {
-            console.log(event.text);
             onSubmit(event.text);
         };
 

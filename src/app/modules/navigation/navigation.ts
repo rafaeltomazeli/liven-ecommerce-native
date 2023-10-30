@@ -17,7 +17,11 @@ export interface NavigationRegisterParams<P> {
     withGlobalGuards?: boolean;
 }
 
+type TabNameToIndexMapper = Record<string, number>;
+
 export class Navigation {
+    static tabNameToIndexMapper: TabNameToIndexMapper = {};
+
     static mergeOptions(componentId: string, options: Options) {
         ReactNativeNavigation.mergeOptions(componentId, options);
     }
@@ -79,7 +83,6 @@ export class Navigation {
     }
 
     static register<P = any>({Component}: NavigationRegisterParams<P>) {
-        console.log(Component);
         if (
             !Component.options ||
             (Component.options && !Component.options.name)
@@ -100,6 +103,19 @@ export class Navigation {
                 badge: text ? text : '',
                 badgeColor: 'red',
             },
+        });
+    }
+
+    static getBottomTabIndex(tabPageName: string): number | undefined {
+        return Navigation.tabNameToIndexMapper[tabPageName];
+    }
+
+    static async navigateToTab(
+        navComponentId: string,
+        tabIndex: number,
+    ): Promise<void> {
+        Navigation.mergeOptions(navComponentId, {
+            bottomTabs: {currentTabIndex: tabIndex},
         });
     }
 }
